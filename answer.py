@@ -3,7 +3,7 @@ import streamlit as st
 ss = st.session_state
 
 def answer():
-    if ss.meal == "none": #削除？※
+    if ss.meal == "none": 
         if ss.suggest ==[]:
             st.write("常食を継続")
         else: #★推奨の同一重複
@@ -16,4 +16,6 @@ def answer():
         # 特食表示
         st.write(f"特別食として {ss.meal} を検討")
         st.write(f"{ss.reason}")
+
+            
 

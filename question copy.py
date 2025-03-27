@@ -101,46 +101,26 @@ def question(qp):
                 ss.suggest .append("処方薬の情報を取得")
             st.rerun()
 
-    #※薬品名追加
+    #※薬品名ポップアップ？
     elif qp == 35:
         st.markdown("#### 処方内容に下記がある？")
-        st.markdown("""
-            <span 
-                title="例: メトホルミン, メトグルコ, ジャヌビア, エクア, 各種インスリン" 
-                style="text-decoration:underline;">
-                糖尿病の治療薬
-            </span>
-        """, unsafe_allow_html=True)
+        st.markdown("###### 糖尿病の治療薬")
+        st.write("例:メトホルミン※追加")
         d_DM = st.radio("選択", ("あり", "なし", "判断できない"), index=2, horizontal=True, key="d_DM_radio", label_visibility="collapsed")
         ss.d_DM = d_DM  
-
-        st.markdown("""
-            <span 
-                title="例: プラバスタチン, ベサフィブラート" 
-                style="text-decoration:underline;">
-                脂質異常症の治療薬
-            </span>
-        """, unsafe_allow_html=True)
+        
+        st.markdown("###### 脂質異常症の治療薬")
+        st.write("例:プラバスタチン※追加")
         d_HL = st.radio("選択", ("あり", "なし", "判断できない"), index=2, horizontal=True, key="d_HL_radio", label_visibility="collapsed")
         ss.d_HL = d_HL  
 
-        st.markdown("""
-            <span 
-                title="例: アムロジピン" 
-                style="text-decoration:underline;">
-                高血圧の治療薬
-            </span>
-        """, unsafe_allow_html=True)
+        st.markdown("###### 高血圧の治療薬")
+        st.write("例:アムロジピン※追加")
         d_HT = st.radio("選択", ("あり", "なし", "判断できない"), index=2, horizontal=True, key="d_HT_radio", label_visibility="collapsed")
         ss.d_HT = d_HT  
         
-        st.markdown("""
-            <span 
-                title="例: リクシアナ" 
-                style="text-decoration:underline;">
-                抗凝固薬, 抗血小板薬, 抗不整脈薬
-            </span>
-        """, unsafe_allow_html=True)
+        st.markdown("###### 抗凝固薬, 抗血小板薬, 抗不整脈薬")
+        st.write("例:リクシアナ※追加")
         d_HF = st.radio("選択", ("あり", "なし", "判断できない"), index=2, horizontal=True, key="d_HF_radio", label_visibility="collapsed")
         ss.d_HF = d_HF  
 
