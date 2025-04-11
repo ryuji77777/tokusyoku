@@ -1,2 +1,8 @@
 # source venv/bin/activate
 # streamlit run main.py
+
+
+#git add .
+#git commit -m "変更内容の説明"
+#git push origin maingit add .
+

@@ -3,12 +3,13 @@ import streamlit as st
 ss = st.session_state
 
 def select_meal():
-    #データ０のとき推奨へ
+    #データ０のとき推奨へ※
+    ss.decision = 2
 
     #心臓病食  
     if ss.usf == "あり":
         ss.meal = "心臓食"
-        ss.reason =  "理由：血管リスクあり、エコー所見をともなう。治療状況を確認"
+        ss.reason =  "理由：エコーで心疾患疑い。治療状況を確認"
 
     #腎臓食
     elif ss.cre >2.0:#※基準確認
@@ -37,10 +38,14 @@ def select_meal():
         ss.meal = "脂質異常症食"
         ss.reason =  "理由：高度肥満あり。検査・治療状況を確認すること"    
     
-    #該当なし
+    #該当なくリスクありは心エコーへ
+    elif ss.risk >0 or ss.bnp >34 or ss.probnp >124 :
+        ss.qp = 1100
+        ss.decision = 0
+ 
+    #該当なくリスクなしは常食へ
     else:
         ss.meal = "none"
     
-    ss.decision = 2
     st.rerun()  
 

@@ -33,7 +33,7 @@ def question(qp):
                 st.warning("数値を入力してください")
 
     elif ss.qp == 20:
-        # 合併症　※病名追加
+        # 合併症　※病名追加,貧血はその後の分岐必要
         st.markdown("##### 合併している病名は？")
 
         cols = st.columns(7)
@@ -53,11 +53,11 @@ def question(qp):
         if PMH_hl: selected_PMHs.append("脂質異常症")
         if PMH_ht: selected_PMHs.append("高血圧症")
         if PMH_kd: selected_PMHs.append("腎疾患")
-        if PMH_none: selected_PMHs.append("該当なし")#変更？
+        if PMH_none: selected_PMHs.append("該当なし")
         ss.PMH = selected_PMHs  
 
         if st.button("次へ", key="next_20"):
-
+            
             meal_list = [
             ("心疾患", "心臓食"),
             ("糖尿病", "糖尿病食"),
@@ -66,6 +66,7 @@ def question(qp):
             ]   
 
             for disease, meal in meal_list:
+            
                 if disease in ss.PMH:
                     ss.meal = meal
                     ss.reason = f"理由：{disease}の病名あり。治療状況を確認すること"
@@ -82,7 +83,6 @@ def question(qp):
                 else :        
                     ss.qp = 30
                     ss.suggest.append("身体疾患の病歴を確認")
-                    break
 
             st.rerun() 
 
@@ -185,7 +185,7 @@ def question(qp):
         hdl = st.text_input("HDL-cho(mg/dL) :不明は0", value="50", key="hdl_input")
         tg_b = st.text_input("TG(mg/dL) :不明は0", value="100", key="tg_b_input")
         bnp = st.text_input("BNP(pg/dL) :不明は0", value="18.4", key="bnp_input")
-        probnp = st.text_input("NT-proBNP(%) :不明は0", value="125", key="probnp_input")
+        probnp = st.text_input("NT-proBNP(%) :不明は0", value="55", key="probnp_input")
         cre = st.text_input("Cre(mg/dL) :不明は0", value="1.0", key="cre_input")
 
         if st.button("次へ"):
@@ -198,8 +198,6 @@ def question(qp):
                 ss.probnp = float(probnp)
                 ss.cre = float(cre)
 
-                #ss.suggest .append("血液検査の項目を再評価")
-
                 if ss.meal == "tbd" and ss.risk >0 :
                     ss.qp = 1100
                 else :
@@ -208,6 +206,8 @@ def question(qp):
 
             except ValueError:
                 st.warning("数値を入力してください")
+
+#血圧質問でrisk評価※
 
     elif ss.qp == 1100:
         st.markdown("##### 心エコーの結果がある？")
@@ -218,13 +218,14 @@ def question(qp):
             if ss.hus  == "あり":
                 ss.qp = 1110
             elif ss.hus  == "なし":
-                ss.decision = 1
+                ss.decision = 2  
+                ss.meal ="none"
                 ss.suggest .append("心エコーの実施")
             st.rerun()
 
 
     elif qp == 1110:
-        st.markdown("##### 心エコーに心不全所見がある？")
+        st.markdown("##### 心エコーに心疾患の所見がある？")
         usf = st.radio("選択", ("あり", "なし", "結果が判断できない"), index=2, horizontal=True, key="usf_radio", label_visibility="collapsed")
         st.write("例:EF<50※変更")
         ss.usf = usf  
@@ -232,16 +233,12 @@ def question(qp):
         if st.button("次へ"):  
             if ss.usf  == "あり":
                 ss.decision = 1
-            elif ss.usf  == "なし":
-                ss.decision = 1
+            elif ss.usf  == "なし":                
+                ss.decision = 2  
+                ss.meal ="none"
+                ss.suggest .append("心エコーの実施")
             elif ss.usf  == "結果が判断できない":
-                ss.decision = 1
+                ss.decision = 2  
+                ss.meal ="none"
             ss.suggest .append("心エコーの結果確認")
             st.rerun()
-
-
-
-
-#risk＋行の追加
-#データ不足の場合　※不要？ suggestありなしで決定
-#                ss.meal = "nodata"

@@ -40,41 +40,6 @@ elif ss.decision == 1:
     select_meal()
 elif ss.decision == 2:
     answer()
-
-# 開発用表示（※削除予定）
-st.write("――――――――――――――――――――――――")
-st.write("以下、開発用表示")
-st.write(f"decision: {ss.get('decision', '未設定')}")
-st.write(f"questionpage: {ss.get('qp', '未設定')}")
-st.write(f"リスク: {ss.get('risk', '未設定')}")
-st.write(f"合併症: {ss.get('PMH', '未設定')}")
-st.write(f"meal: {ss.meal}")
-st.write(f"suggest: {ss.get('suggest', '未設定')}")
-st.write(f"reason: {ss.get('reason', '未設定')}")
-st.write(
-    f"年齢: {ss.get('age', '未設定')}"
-    f" 性別: {ss.gender}"
-    )
-st.write(
-    f"身長: {ss.get('height', '未設定')}"
-    f" 体重: {ss.get('weight', '未設定')}"
-    f" BMI: {ss.get('bmi', '未設定')}"
-    )
-st.write(
-    f"糖尿病薬:{ss.get('d_DM', '未設定')}"
-    f" 脂質異常薬: {ss.get('d_HL', '未設定')}"
-    f" 降圧薬: {ss.get('d_HT', '未設定')}"
-    f" 心疾患薬: {ss.get('d_HF', '未設定')}"
-    )
-
-st.write(
-    f"HbA1c: {ss.get('a1c', '未設定')}"
-    f" LDL: {ss.get('ldl', '未設定')}"
-    f" HDL: {ss.get('hdl', '未設定')}"
-    f" TG: {ss.get('tg_b', '未設定')}"
-    f" BNP: {ss.get('bnp', '未設定')}"
-    f" NT-proBNP: {ss.get('probnp', '未設定')}"
-    f" Cre: {ss.get('cre', '未設定')}"
-    )
-
-
+    if st.button("最初に戻る", key="restart"):
+        st.session_state.clear() 
+        st.switch_page("main.py") 
